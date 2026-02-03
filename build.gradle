@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'net.serenity-bdd.serenity-gradle-plugin' version '4.2.34'
+}
+
+group 'co.com.linktic'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+def serenityVersion = '4.2.34'
+
+dependencies {
+    // Serenity Core y Cucumber
+    testImplementation "net.serenity-bdd:serenity-core:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-cucumber:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-screenplay:${serenityVersion}"
+    testImplementation "net.serenity-bdd:serenity-screenplay-webdriver:${serenityVersion}"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.2'
+    testImplementation 'org.junit.vintage:junit-vintage-engine:5.10.2'
+    testImplementation 'io.cucumber:cucumber-junit:7.15.0'
+    testImplementation "net.serenity-bdd:serenity-core:4.2.34"
+    testImplementation "io.github.bonigarcia:webdrivermanager:5.9.2"
+    testImplementation "net.serenity-bdd:serenity-screenplay-webdriver:4.2.34"
+    implementation 'org.slf4j:slf4j-simple:2.0.12'
+    testImplementation "org.hamcrest:hamcrest-all:1.3"
+    implementation "net.serenity-bdd:serenity-core:4.0.15"
+    implementation "net.serenity-bdd:serenity-screenplay:4.0.15"
+}
+
+test {
+    useJUnitPlatform() // Permite correr el motor Vintage
+    testLogging {
+        events "passed", "skipped", "failed"
+        showStandardStreams = true
+    }
+}
+
+serenity {
+    reports = ["html"]
+}
